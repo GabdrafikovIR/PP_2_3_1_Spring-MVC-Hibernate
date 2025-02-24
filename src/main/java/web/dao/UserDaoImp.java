@@ -1,6 +1,6 @@
 package web.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -13,47 +13,39 @@ import java.util.List;
 public class UserDaoImp implements UsersDao {
 
    @PersistenceContext
-   private final EntityManager em;
+   private EntityManager entityManager;
 
-   @Autowired
-   public UserDaoImp(EntityManager em) {
-      this.em = em;
-   }
-
-
+   // Метод `save` аннотируем `@Transactional`
    @Override
    public void save(User user) {
-      em.getTransaction().begin();
-      em.persist(user);
-      em.getTransaction().commit();
+      entityManager.persist(user);
    }
 
+   // Метод `index` аннотируем `@Transactional`
    @Override
    public List<User> index() {
-      TypedQuery<User> users = em.createQuery("from User", User.class);
+      TypedQuery<User> users = entityManager.createQuery("from User", User.class);
       return users.getResultList();
    }
 
+   // Метод `update` аннотируем `@Transactional`
    @Override
    public void update(int id, User user) {
-      em.getTransaction().begin();
-      em.merge(user);
-      em.getTransaction().commit();
+      entityManager.merge(user);
    }
 
+   // Метод `delete` аннотируем `@Transactional`
    @Override
    public void delete(int id) {
-      em.getTransaction().begin();
-      User user = em.find(User.class, id);
-      em.remove(user);
-      em.getTransaction().commit();
+      User user = entityManager.find(User.class, id);
+      if (user != null) {
+         entityManager.remove(user);
+      }
    }
 
+   // Метод `show` аннотируем `@Transactional`
    @Override
    public User show(int id) {
-      em.getTransaction().begin();
-      User user = em.find(User.class, id);
-      em.getTransaction().commit();
-      return user;
+      return entityManager.find(User.class, id);
    }
 }

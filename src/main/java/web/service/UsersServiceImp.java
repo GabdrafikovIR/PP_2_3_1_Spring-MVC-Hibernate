@@ -8,9 +8,10 @@ import web.model.User;
 
 import java.util.List;
 
-@Service
-public class UsersServiceImp implements UsersService {
 
+@Service
+@Transactional(readOnly = true)
+public class UsersServiceImp implements UsersService {
    private final UsersDao usersDao;
 
    @Autowired
@@ -18,32 +19,30 @@ public class UsersServiceImp implements UsersService {
       this.usersDao = usersDao;
    }
 
-   @Transactional
    @Override
-   public void save(web.model.User user) {
+   @Transactional
+   public void save(User user) {
       usersDao.save(user);
    }
 
-   @Transactional(readOnly = true)
    @Override
-   public List<web.model.User> index() {
+   public List<User> index() {
       return usersDao.index();
    }
 
-   @Transactional(readOnly = true)
    @Override
-   public web.model.User show(int id) {
+   public User show(int id) {
       return usersDao.show(id);
    }
 
-   @Transactional
    @Override
-   public void update(int id, web.model.User updatedUser) {
+   @Transactional
+   public void update(int id, User updatedUser) {
       usersDao.update(id, updatedUser);
    }
 
-   @Transactional
    @Override
+   @Transactional
    public void delete(int id) {
       usersDao.delete(id);
    }

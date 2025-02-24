@@ -13,11 +13,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name="name")
     @NotEmpty(message = "Name should not be empty")
     private String name;
 
-    @Column
+    @Column(name="lastname")
     @NotEmpty(message = "Name should not be empty")
     private String lastName;
 
