@@ -25,7 +25,7 @@ public class UsersController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", usersService.index());
-        return "/index";
+        return "users/index";
     }
 
     @GetMapping("/{id}")
@@ -46,7 +46,7 @@ public class UsersController {
             return "users/new";
         }
         usersService.save(user);
-        return "redirect:/users ";
+        return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
