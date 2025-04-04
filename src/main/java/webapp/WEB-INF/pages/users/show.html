@@ -11,8 +11,9 @@
 
 <a th:href="@{{id}/edit(id=${user.getId()})}">Edit</a>
 
-<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
-    <input type="submit" value="Delete"/>
+<a th:href="@{/users/{id}/edit(id=${user.id})}">Edit</a>
+<form th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
+    <input type="submit" value="Delete">
 </form>
 
 </body>

@@ -10,7 +10,6 @@ import java.util.List;
 
 
 @Service
-@Transactional(readOnly = true)
 public class UsersServiceImp implements UsersService {
    private final UsersDao usersDao;
 
@@ -26,11 +25,13 @@ public class UsersServiceImp implements UsersService {
    }
 
    @Override
+   @Transactional(readOnly = true)
    public List<User> index() {
       return usersDao.index();
    }
 
    @Override
+   @Transactional(readOnly = true)
    public User show(int id) {
       return usersDao.show(id);
    }

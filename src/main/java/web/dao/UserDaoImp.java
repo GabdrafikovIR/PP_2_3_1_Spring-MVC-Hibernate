@@ -15,26 +15,22 @@ public class UserDaoImp implements UsersDao {
    @PersistenceContext
    private EntityManager entityManager;
 
-   // Метод `save` аннотируем `@Transactional`
    @Override
    public void save(User user) {
       entityManager.persist(user);
    }
 
-   // Метод `index` аннотируем `@Transactional`
    @Override
    public List<User> index() {
       TypedQuery<User> users = entityManager.createQuery("from User", User.class);
       return users.getResultList();
    }
 
-   // Метод `update` аннотируем `@Transactional`
    @Override
    public void update(int id, User user) {
       entityManager.merge(user);
    }
 
-   // Метод `delete` аннотируем `@Transactional`
    @Override
    public void delete(int id) {
       User user = entityManager.find(User.class, id);
@@ -43,7 +39,6 @@ public class UserDaoImp implements UsersDao {
       }
    }
 
-   // Метод `show` аннотируем `@Transactional`
    @Override
    public User show(int id) {
       return entityManager.find(User.class, id);
